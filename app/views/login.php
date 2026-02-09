@@ -25,8 +25,8 @@
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Prism.js for syntax highlighting -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <!-- Prism.js for syntax highlighting (served locally to satisfy CSP) -->
+    <link href="/assets/prism-tomorrow.min.css" rel="stylesheet">
     
     <!-- Custom syntax highlighting overrides -->
     <style>
@@ -141,14 +141,14 @@
                                                 </div>
                                                 <div class="invalid-feedback" x-show="errors.confirmPassword" x-text="errors.confirmPassword" style="display: none;"></div>
                                             </div>
-                                            <div class="col-12">
+                                            <!-- <div class="col-12">
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="checkbox" x-model="form.agreeTerms" required="" value="">
                                                     <label class="form-check-label">
                                                         I agree to the <a href="#" class="text-primary">Terms of Service</a> and <a href="#" class="text-primary">Privacy Policy</a>
                                                     </label>
                                                 </div>
-                                            </div>
+                                            </div> -->
                                             <div class="col-12">
                                                 <button type="submit" class="btn btn-success" :disabled="isSubmitting || !isFormValid">
                                                     <span x-show="!isSubmitting" style="display: none;">
@@ -179,3 +179,122 @@
 
 
 </html> 
+
+<script nonce="<?php echo $nonce ?? ''; ?>">
+    function registrationForm() {
+        return {
+            form: {
+                username: '',
+                email: '',
+                password: '',
+                confirmPassword: '',
+                agreeTerms: false
+            },
+            errors: {},
+            showPassword: false,
+            isSubmitting: false,
+            passwordStrength: {
+                percentage: 0,
+                level: 'weak',
+                text: 'Weak',
+                color: 'danger'
+            },
+            
+            get isFormValid() {
+                return this.form.username && this.form.email && this.form.password && 
+                       this.form.confirmPassword && this.form.agreeTerms && 
+                       !Object.values(this.errors).some(err => err);
+            },
+
+            validateField(field) {
+                this.errors[field] = '';
+
+                switch(field) {
+                    case 'username':
+                        if (this.form.username.length < 3) {
+                            this.errors.username = 'Minimum 3 characters';
+                        }
+                        break;
+                    case 'email':
+                        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                        if (!emailRegex.test(this.form.email)) {
+                            this.errors.email = 'Invalid email format';
+                        }
+                        break;
+                    case 'confirmPassword':
+                        if (this.form.password && this.form.password !== this.form.confirmPassword) {
+                            this.errors.confirmPassword = 'Passwords do not match';
+                        }
+                        break;
+                }
+            },
+
+            validatePassword() {
+                const password = this.form.password;
+                let strength = 0;
+
+                if (password.length >= 8) strength++;
+                if (/[A-Z]/.test(password)) strength++;
+                if (/[a-z]/.test(password)) strength++;
+                if (/[0-9]/.test(password)) strength++;
+                if (/[^A-Za-z0-9]/.test(password)) strength++;
+
+                if (strength <= 2) {
+                    this.passwordStrength = { percentage: 33, level: 'weak', text: 'Weak', color: 'danger' };
+                } else if (strength <= 3) {
+                    this.passwordStrength = { percentage: 66, level: 'medium', text: 'Medium', color: 'warning' };
+                } else {
+                    this.passwordStrength = { percentage: 100, level: 'strong', text: 'Strong', color: 'success' };
+                }
+
+                this.validateField('confirmPassword');
+            },
+
+            getFieldClass(field) {
+                return this.errors[field] ? 'is-invalid' : '';
+            },
+
+            async submitForm() {
+                // Validate all fields
+                this.validateField('username');
+                this.validateField('email');
+                this.validateField('confirmPassword');
+
+                if (!this.isFormValid) {
+                    return;
+                }
+
+                this.isSubmitting = true;
+
+                try {
+                    const response = await fetch('/api/register', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            username: this.form.username,
+                            email: this.form.email,
+                            password: this.form.password
+                        })
+                    });
+
+                    const data = await response.json();
+
+                    if (data.success) {
+                        // Redirect to analytics
+                        window.location.href = '/analytics';
+                    } else {
+                        this.errors.general = data.message || 'Registration failed';
+                        console.error('Registration error:', data);
+                    }
+                } catch (error) {
+                    this.errors.general = 'An error occurred during registration';
+                    console.error('Error:', error);
+                } finally {
+                    this.isSubmitting = false;
+                }
+            }
+        }
+    }
+</script>
