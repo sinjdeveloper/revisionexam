@@ -81,23 +81,20 @@ if (Debugger::$showBar === true && php_sapi_name() !== 'cli') {
  *           Database Service Setup           *
  **********************************************/
 // PostgreSQL Configuration:
-if (!empty($config['database'])) {
-	// Build PostgreSQL DSN
-	$dbConfig = $config['database'];
-	$dsn = 'pgsql:host=' . $dbConfig['host'] . 
-	       ';port=' . ($dbConfig['port'] ?? 5432) . 
-	       ';dbname=' . $dbConfig['dbname'] . 
-	       ';sslmode=disable'; // Change to 'require' for production with SSL
+$dbConfig = $config['database'];
+$dsn = 'pgsql:host=' . $dbConfig['host'] . 
+       ';port=' . ($dbConfig['port'] ?? 5432) . 
+       ';dbname=' . $dbConfig['dbname'] . 
+       ';sslmode=disable'; // Change to 'require' for production with SSL
 
-	// Register Flight::db() service
-	// In development, use PdoQueryCapture to log queries; in production, use PdoWrapper for performance.
-	$pdoClass = Debugger::$showBar === true ? PdoQueryCapture::class : PdoWrapper::class;
-	$app->register('db', $pdoClass, [
-		$dsn,
-		$dbConfig['user'] ?? 'postgres',
-		$dbConfig['password'] ?? ''
-	]);
-}
+// Register Flight::db() service
+// In development, use PdoQueryCapture to log queries; in production, use PdoWrapper for performance.
+$pdoClass = Debugger::$showBar === true ? PdoQueryCapture::class : PdoWrapper::class;
+$app->register('db', $pdoClass, [
+	$dsn,
+	$dbConfig['user'] ?? 'postgres',
+	$dbConfig['password'] ?? ''
+]);
 
 /**********************************************
  *         Third-Party Integrations           *
