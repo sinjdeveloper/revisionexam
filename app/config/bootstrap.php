@@ -40,6 +40,9 @@ $config = require('config.php');
  */ 
 require('services.php');
 
+// Initialize CSP nonce for security headers
+$app->set('csp_nonce', bin2hex(random_bytes(16)));
+
 // Whip out the ol' router and we'll pass that to the routes file
 $router = $app->router();
 

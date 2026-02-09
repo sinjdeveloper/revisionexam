@@ -6,6 +6,9 @@ use flight\debug\database\PdoQueryCapture;
 use flight\debug\tracy\TracyExtensionLoader;
 use Tracy\Debugger;
 
+$ds = DIRECTORY_SEPARATOR;
+
+
 /*********************************************
  *         FlightPHP Service Setup           *
  *********************************************

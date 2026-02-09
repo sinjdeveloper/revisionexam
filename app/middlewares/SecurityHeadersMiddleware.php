@@ -19,13 +19,22 @@ class SecurityHeadersMiddleware
 	{
 		$nonce = $this->app->get('csp_nonce');
 
-		// development mode to execute Tracy debug bar CSS
+		// development mode to execute Tracy debug bar CSS and allow eval for some libs
 		$tracyCssBypass = "'nonce-{$nonce}'";
-		if(Debugger::$showBar === true) {
+		$allowUnsafeEval = '';
+		if (Debugger::$showBar === true) {
 			$tracyCssBypass = ' \'unsafe-inline\'';
+			// Some frontend libs (Alpine/plugins) use dynamic evaluation in dev builds.
+			// Allow 'unsafe-eval' in script-src only in development/debug mode.
+			$allowUnsafeEval = " 'unsafe-eval'";
 		}
 
-		$csp = "default-src 'self'; script-src 'self' 'nonce-{$nonce}' 'strict-dynamic'; style-src 'self' {$tracyCssBypass}; img-src 'self' data:;";
+		// Allow Google Fonts for styles and fonts (useful for the admin template)
+		$csp = "default-src 'self'; ";
+		$csp .= "script-src 'self' 'nonce-{$nonce}' 'strict-dynamic'{$allowUnsafeEval}; ";
+		$csp .= "style-src 'self' {$tracyCssBypass} https://fonts.googleapis.com; ";
+		$csp .= "font-src 'self' https://fonts.gstatic.com data:; ";
+		$csp .= "img-src 'self' data:;";
 		$this->app->response()->header('X-Frame-Options', 'SAMEORIGIN');
 		$this->app->response()->header("Content-Security-Policy", $csp);
 		$this->app->response()->header('X-XSS-Protection', '1; mode=block');
