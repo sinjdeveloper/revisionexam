@@ -35,7 +35,7 @@ CREATE TABLE produits(
 CREATE TABLE status(
     id SERIAL PRIMARY KEY,
     nom VARCHAR(50) NOT NULL
-);
+);  
 
 CREATE TABLE echange(
     id SERIAL PRIMARY KEY,
