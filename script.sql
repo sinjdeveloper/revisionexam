@@ -39,10 +39,13 @@ CREATE TABLE status(
 
 CREATE TABLE echange(
     id SERIAL PRIMARY KEY,
-    id_produit INT REFERENCES produits(id),
+    id_produit1 INT REFERENCES produits(id),
+    id_produit2 INT REFERENCES produits(id),
     id_proprietaire INT REFERENCES users(id),
     id_acheteur INT REFERENCES users(id),
     id_status INT REFERENCES status(id),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+DROP TABLE echange;
 
