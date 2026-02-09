@@ -74,12 +74,12 @@ return [
 
 		// PostgreSQL example (change values to match your environment):
 		
-		// 'driver'   => 'pgsql',
-		// 'host'     => '127.0.0.1',
-		// 'port'     => 5432,
-		// 'dbname'   => 'my_database',
-		// 'user'     => 'my_user',
-		// 'password' => 'my_password',
+		'driver'   => 'pgsql',
+		'host'     => '127.0.0.1',
+		'port'     => 5432,
+		'dbname'   => 'my_database',
+		'user'     => 'postgres',
+		'password' => 'Motdepasse',
 
 		// 'sslmode'  => 'prefer', // 'disable'|'allow'|'prefer'|'require' depending on your setup
 
