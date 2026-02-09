@@ -26,6 +26,35 @@ $router->group('', function (Router $router) use ($app) {
 		$render('login');
 	});
 
+	// Routes for top-level views in app/views
+	$router->get('/login', function () use ($app, $render) {
+		$render('login');
+	});
+
+	$router->get('/dashboard', function () use ($app, $render) {
+		$render('index');
+	});
+
+	$router->get('/analytics', function () use ($app, $render) {
+		$render('analytics');
+	});
+
+	$router->get('/orders', function () use ($app, $render) {
+		$render('orders');
+	});
+
+	$router->get('/products', function () use ($app, $render) {
+		$render('products');
+	});
+
+	$router->get('/users', function () use ($app, $render) {
+		$render('users');
+	});
+
+	$router->get('/welcome', function () use ($app, $render) {
+		$render('welcome');
+	});
+
 
 
 
