@@ -1,6 +1,14 @@
 -- Active: 1767705706205@@127.0.0.1@5432@echange
 CREATE DATABASE echange;
 
+-- Drop tables with CASCADE to handle foreign key constraints
+DROP TABLE IF EXISTS echange CASCADE;
+DROP TABLE IF EXISTS produits CASCADE;
+DROP TABLE IF EXISTS status CASCADE;
+DROP TABLE IF EXISTS categorie CASCADE;
+DROP TABLE IF EXISTS admins CASCADE;
+DROP TABLE IF EXISTS users CASCADE;
+
 CREATE TABLE users(
     id SERIAL PRIMARY KEY,
     username VARCHAR(255) NOT NULL,
@@ -26,7 +34,8 @@ CREATE TABLE produits(
     id SERIAL PRIMARY KEY,
     nom VARCHAR(255) NOT NULL,
     description TEXT,
-    id_categorie INT REFERENCES categorie(id),
+    id_proprietaire INT REFERENCES users(id) ON DELETE CASCADE,
+    id_categorie INT REFERENCES categorie(id) ON DELETE CASCADE,
     prix DECIMAL(10, 2) NOT NULL,
     disponible BOOLEAN DEFAULT TRUE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -39,13 +48,13 @@ CREATE TABLE status(
 
 CREATE TABLE echange(
     id SERIAL PRIMARY KEY,
-    id_produit1 INT REFERENCES produits(id),
-    id_produit2 INT REFERENCES produits(id),
-    id_proprietaire INT REFERENCES users(id),
-    id_acheteur INT REFERENCES users(id),
-    id_status INT REFERENCES status(id),
+    id_produit1 INT REFERENCES produits(id) ON DELETE CASCADE,
+    id_produit2 INT REFERENCES produits(id) ON DELETE CASCADE,
+    id_proprietaire INT REFERENCES users(id) ON DELETE CASCADE,
+    id_acheteur INT REFERENCES users(id) ON DELETE CASCADE,
+    id_status INT REFERENCES status(id) ON DELETE CASCADE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-DROP TABLE echange;
+
 
