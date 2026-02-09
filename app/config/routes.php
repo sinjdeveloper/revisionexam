@@ -1,6 +1,7 @@
 <?php
 
 use app\controllers\ApiExampleController;
+use app\controllers\ApiListeObjet;
 use app\middlewares\SecurityHeadersMiddleware;
 use flight\Engine;
 use flight\net\Router;
@@ -148,10 +149,25 @@ $router->group('', function (Router $router) use ($app) {
 
 	});
 
-	// $router->group('/api', function () use ($router) {
-	// 	$router->get('/users', [ApiExampleController::class, 'getUsers']);
-	// 	$router->get('/users/@id:[0-9]', [ApiExampleController::class, 'getUser']);
-	// 	$router->post('/users/@id:[0-9]', [ApiExampleController::class, 'updateUser']);
-	// });
+	// API Routes
+	$router->group('/api', function (Router $router) use ($app) {
+		
+		// Objets (Produits)
+		$router->get('/objet/liste', function () use ($app) {
+			$controller = new ApiListeObjet($app);
+			$controller->getListeObjet();
+		});
+
+		$router->get('/objet/user/@id:[0-9]', function ($id) use ($app) {
+			$controller = new ApiListeObjet($app);
+			$controller->getListeObjetAppartenant($id);
+		});
+
+		// Example API routes
+		// $router->get('/users', [ApiExampleController::class, 'getUsers']);
+		// $router->get('/users/@id:[0-9]', [ApiExampleController::class, 'getUser']);
+		// $router->post('/users/@id:[0-9]', [ApiExampleController::class, 'updateUser']);
+		
+	});
 
 }, [SecurityHeadersMiddleware::class]);
