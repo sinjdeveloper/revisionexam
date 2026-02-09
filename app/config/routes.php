@@ -22,7 +22,7 @@ $router->group('', function (Router $router) use ($app) {
 
 	// Login index
 	$router->get('/', function () use ($app, $render) {
-		$render('welcome');
+		$render('login');
 	});
 
 
