@@ -18,187 +18,33 @@
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/assets/favicon-CvUZKS4z.svg">
     <link rel="icon" type="image/png" href="/assets/favicon-B_cwPWBd.png">
-    
     <!-- PWA Manifest -->
     <link rel="manifest" href="/assets/manifest-DTaoG9pG.json">
     
     <!-- Preload critical fonts -->
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <script type="module" crossorigin nonce="<?php echo $nonce ?? ''; ?>" src="/assets/vendor-bootstrap-C9iorZI5.js"></script>
-  <script type="module" crossorigin nonce="<?php echo $nonce ?? ''; ?>" src="/assets/vendor-charts-DGwYAWel.js"></script>
-  <script type="module" crossorigin nonce="<?php echo $nonce ?? ''; ?>" src="/assets/vendor-ui-CflGdlft.js"></script>
-  <script type="module" crossorigin nonce="<?php echo $nonce ?? ''; ?>" src="/assets/main-DwHigVru.js"></script>
-  <script type="module" crossorigin nonce="<?php echo $nonce ?? ''; ?>" src="/assets/forms-CC-rf4V3.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/main-QD_VOj1Y.css">
+    
+    <!-- ApexCharts CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script type="module" crossorigin nonce="<?php echo $nonce ?? ''; ?>" src="/assets/vendor-bootstrap-C9iorZI5.js"></script>
+    <script type="module" crossorigin nonce="<?php echo $nonce ?? ''; ?>" src="/assets/vendor-charts-DGwYAWel.js"></script>
+    <script type="module" crossorigin nonce="<?php echo $nonce ?? ''; ?>" src="/assets/vendor-ui-CflGdlft.js"></script>
+    <script type="module" crossorigin nonce="<?php echo $nonce ?? ''; ?>" src="/assets/main-DwHigVru.js"></script>
+    <script type="module" crossorigin nonce="<?php echo $nonce ?? ''; ?>" src="/assets/forms-CC-rf4V3.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/main-QD_VOj1Y.css">
 </head>
 
-<body data-page="forms">
+<body data-page="forms" class="forms-page">
     <!-- Admin App Container -->
     <div class="admin-app">
         <div class="admin-wrapper" id="admin-wrapper">
-            
-            <?php include_once("inc/header.php") ; ?>
-            <!-- Sidebar -->
-            <aside class="admin-sidebar" id="admin-sidebar">
-                <div class="sidebar-content">
-                    <nav class="sidebar-nav">
-                        <ul class="nav flex-column">
-                            <li class="nav-item">
-                                <a class="nav-link" href="/TEMPLATE/dashboard">
-                                    <i class="bi bi-speedometer2"></i>
-                                    <span>Dashboard</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/TEMPLATE/analytics">
-                                    <i class="bi bi-graph-up"></i>
-                                    <span>Analytics</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/TEMPLATE/users">
-                                    <i class="bi bi-people"></i>
-                                    <span>Users</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/TEMPLATE/products">
-                                    <i class="bi bi-box"></i>
-                                    <span>Products</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/TEMPLATE/orders">
-                                    <i class="bi bi-bag-check"></i>
-                                    <span>Orders</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link active" href="/TEMPLATE/forms">
-                                    <i class="bi bi-ui-checks"></i>
-                                    <span>Forms</span>
-                                    <span class="badge bg-success rounded-pill ms-auto">Active</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#elementsSubmenu" aria-expanded="false">
-                                    <i class="bi bi-puzzle"></i>
-                                    <span>Elements</span>
-                                    <span class="badge bg-primary rounded-pill ms-2 me-2">New</span>
-                                    <i class="bi bi-chevron-down ms-auto"></i>
-                                </a>
-                                <div class="collapse" id="elementsSubmenu">
-                                    <ul class="nav nav-submenu">
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="/TEMPLATE/elements">
-                                                <i class="bi bi-grid"></i>
-                                                <span>Overview</span>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="/TEMPLATE/elements/buttons">
-                                                <i class="bi bi-square"></i>
-                                                <span>Buttons</span>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="/TEMPLATE/elements/alerts">
-                                                <i class="bi bi-exclamation-triangle"></i>
-                                                <span>Alerts</span>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="/TEMPLATE/elements/badges">
-                                                <i class="bi bi-award"></i>
-                                                <span>Badges</span>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="/TEMPLATE/elements/cards">
-                                                <i class="bi bi-card-text"></i>
-                                                <span>Cards</span>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="/TEMPLATE/elements/modals">
-                                                <i class="bi bi-window"></i>
-                                                <span>Modals</span>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="/TEMPLATE/elements/forms">
-                                                <i class="bi bi-ui-checks"></i>
-                                                <span>Forms</span>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="/TEMPLATE/elements/tables">
-                                                <i class="bi bi-table"></i>
-                                                <span>Tables</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/TEMPLATE/reports">
-                                    <i class="bi bi-file-earmark-text"></i>
-                                    <span>Reports</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/TEMPLATE/messages">
-                                    <i class="bi bi-chat-dots"></i>
-                                    <span>Messages</span>
-                                    <span class="badge bg-danger rounded-pill ms-auto">3</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/TEMPLATE/calendar">
-                                    <i class="bi bi-calendar-event"></i>
-                                    <span>Calendar</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/TEMPLATE/files">
-                                    <i class="bi bi-folder2-open"></i>
-                                    <span>Files</span>
-                                </a>
-                            </li>
-                            <li class="nav-item mt-3">
-                                <small class="text-muted px-3 text-uppercase fw-bold">Admin</small>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/TEMPLATE/settings">
-                                    <i class="bi bi-gear"></i>
-                                    <span>Settings</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/TEMPLATE/security">
-                                    <i class="bi bi-shield-check"></i>
-                                    <span>Security</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/TEMPLATE/help">
-                                    <i class="bi bi-question-circle"></i>
-                                    <span>Help & Support</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-            </aside>
-
-            <!-- Floating Hamburger Menu -->
-            <button class="hamburger-menu" 
-                    type="button" 
-                    data-sidebar-toggle
-                    aria-label="Toggle sidebar">
-                <i class="bi bi-list"></i>
-            </button>
+            <?php
+            // index 6 = Forms
+            include_once("inc/header.php");
+            $aside_indice = 6;
+            include_once("inc/aside-TEMPLATE.php");
+            ?>
 
             <!-- Main Content -->
             <main class="admin-main">
@@ -1011,7 +857,7 @@
                 </div>
             </main>
 
-            <!-- Footer -->            <?php include_once("inc/header.php") ; ?>
+            <!-- Footer -->
 
         </div> <!-- /.admin-wrapper -->
     </div>
