@@ -44,6 +44,44 @@ $router->group('', function (Router $router) use ($app) {
 		$render('products');
 	});
 
+	// Product detail (fiche produit)
+	$router->get('/products/@id', function ($id) use ($app) {
+		$nonce = $app->get('csp_nonce');
+		try {
+			$stmt = $app->db()->prepare('SELECT p.*, c.nom AS id_categorie_nom, u.username AS proprietaire_nom FROM produits p LEFT JOIN categorie c ON p.id_categorie = c.id LEFT JOIN users u ON p.id_proprietaire = u.id WHERE p.id = :id LIMIT 1');
+			$stmt->execute([':id' => $id]);
+			$product = $stmt->fetch();
+		} catch (Exception $e) {
+			error_log('DB error fetching product: ' . $e->getMessage());
+			$app->halt(500, 'Erreur serveur');
+		}
+
+		if (empty($product)) {
+			$app->halt(404, 'Produit non trouvé');
+		}
+
+		$app->render('product-detail', ['nonce' => $nonce, 'product' => $product]);
+	});
+
+	// Route de test rapide (fiche produit factice) pour faciliter les tests UI
+	$router->get('/products/test', function () use ($app) {
+		$nonce = $app->get('csp_nonce');
+		$product = [
+			'id' => 999,
+			'nom' => 'Produit de test',
+			'description' => "Description de test pour la fiche produit. Ceci permet de vérifier l'affichage.",
+			'prix' => 99.99,
+			'disponible' => 1,
+			'id_categorie_nom' => 'Électronique',
+			'proprietaire_nom' => 'alice',
+			'status_nom' => 'Complété',
+			'created_at' => date('Y-m-d H:i:s'),
+			'image' => '/assets/product-placeholder.svg'
+		];
+
+		$app->render('product-detail', ['nonce' => $nonce, 'product' => $product]);
+	});
+
 
 
 

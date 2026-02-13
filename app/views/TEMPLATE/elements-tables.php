@@ -24,127 +24,23 @@
     
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-            <!-- Sidebar (included) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script type="module" crossorigin nonce="<?php echo $nonce ?? ''; ?>" src="/assets/vendor-bootstrap-C9iorZI5.js"></script>
+    <script type="module" crossorigin nonce="<?php echo $nonce ?? ''; ?>" src="/assets/vendor-charts-DGwYAWel.js"></script>
+    <script type="module" crossorigin nonce="<?php echo $nonce ?? ''; ?>" src="/assets/vendor-ui-CflGdlft.js"></script>
+    <script type="module" crossorigin nonce="<?php echo $nonce ?? ''; ?>" src="/assets/main-DwHigVru.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/main-QD_VOj1Y.css">
+</head>
+
+<body data-page="elements-tables" class="elements-page">
+    <div class="admin-app">
+        <div class="admin-wrapper" id="admin-wrapper">
+            <?php include_once("inc/header.php"); ?>
             <?php
             // active submenu child: Tables
             $aside_indice = '/TEMPLATE/elements/tables';
             include_once("inc/aside-TEMPLATE.php");
             ?>
-                                    <span class="badge bg-success rounded-pill ms-auto">New</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link active" href="#" data-bs-toggle="collapse" data-bs-target="#elementsSubmenu" aria-expanded="true">
-                                    <i class="bi bi-puzzle"></i>
-                                    <span>Elements</span>
-                                    <span class="badge bg-primary rounded-pill ms-2 me-2">New</span>
-                                    <i class="bi bi-chevron-down ms-auto"></i>
-                                </a>
-                                <div class="collapse show" id="elementsSubmenu">
-                                    <ul class="nav nav-submenu">
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="/TEMPLATE/elements">
-                                                <i class="bi bi-grid"></i>
-                                                <span>Overview</span>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="/TEMPLATE/elements/buttons">
-                                                <i class="bi bi-square"></i>
-                                                <span>Buttons</span>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="/TEMPLATE/elements/alerts">
-                                                <i class="bi bi-exclamation-triangle"></i>
-                                                <span>Alerts</span>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="/TEMPLATE/elements/badges">
-                                                <i class="bi bi-award"></i>
-                                                <span>Badges</span>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="/TEMPLATE/elements/cards">
-                                                <i class="bi bi-card-text"></i>
-                                                <span>Cards</span>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="/TEMPLATE/elements/modals">
-                                                <i class="bi bi-window"></i>
-                                                <span>Modals</span>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="/TEMPLATE/elements/forms">
-                                                <i class="bi bi-ui-checks"></i>
-                                                <span>Forms</span>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link active" href="/TEMPLATE/elements/tables">
-                                                <i class="bi bi-table"></i>
-                                                <span>Tables</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/TEMPLATE/reports">
-                                    <i class="bi bi-file-earmark-text"></i>
-                                    <span>Reports</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/TEMPLATE/messages">
-                                    <i class="bi bi-chat-dots"></i>
-                                    <span>Messages</span>
-                                    <span class="badge bg-danger rounded-pill ms-auto">3</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/TEMPLATE/calendar">
-                                    <div class="element-code-block">
-                                        <pre><code class="language-html">&lt;table class="table"&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th scope="col"&gt;#&lt;/th&gt;
-      &lt;th scope="col"&gt;First&lt;/th&gt;
-      &lt;th scope="col"&gt;Last&lt;/th&gt;
-      &lt;th scope="col"&gt;Handle&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;th scope="row"&gt;1&lt;/th&gt;
-      &lt;td&gt;Mark&lt;/td&gt;
-      &lt;td&gt;Otto&lt;/td&gt;
-      &lt;td&gt;@mdo&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th scope="row"&gt;2&lt;/th&gt;
-      &lt;td&gt;Jacob&lt;/td&gt;
-      &lt;td&gt;Thornton&lt;/td&gt;
-      &lt;td&gt;@fat&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;th scope="row"&gt;3&lt;/th&gt;
-      &lt;td colspan="2"&gt;Larry the Bird&lt;/td&gt;
-      &lt;td&gt;@twitter&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;</code></pre>
-                                    </div>
-                                    <button class="btn btn-sm btn-outline-secondary" onclick="copyCode(this)">
-                                        <i class="bi bi-clipboard me-2"></i>Copy Code
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
 
                         <!-- Table Variants -->
                         <div class="col-lg-6">
@@ -168,76 +64,6 @@
                                                     <td>Cell</td>
                                                     <td>Cell</td>
                                                 </tr>
-                                                <tr class="table-primary">
-                                                    <th scope="row">Primary</th>
-                                                    <td>Cell</td>
-                                                    <td>Cell</td>
-                                                </tr>
-                                                <tr class="table-secondary">
-                                                    <th scope="row">Secondary</th>
-                                                    <td>Cell</td>
-                                                    <td>Cell</td>
-                                                </tr>
-                                                <tr class="table-success">
-                                                    <th scope="row">Success</th>
-                                                    <td>Cell</td>
-                                                    <td>Cell</td>
-                                                </tr>
-                                                <tr class="table-danger">
-                                                    <th scope="row">Danger</th>
-                                                    <td>Cell</td>
-                                                    <td>Cell</td>
-                                                </tr>
-                                                <tr class="table-warning">
-                                                    <th scope="row">Warning</th>
-                                                    <td>Cell</td>
-                                                    <td>Cell</td>
-                                                </tr>
-                                                <tr class="table-info">
-                                                    <th scope="row">Info</th>
-                                                    <td>Cell</td>
-                                                    <td>Cell</td>
-                                                </tr>
-                                                <tr class="table-light">
-                                                    <th scope="row">Light</th>
-                                                    <td>Cell</td>
-                                                    <td>Cell</td>
-                                                </tr>
-                                                <tr class="table-dark">
-                                                    <th scope="row">Dark</th>
-                                                    <td>Cell</td>
-                                                    <td>Cell</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <div class="element-code-block">
-                                        <pre><code class="language-html">&lt;table class="table"&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;th scope="row"&gt;Default&lt;/th&gt;
-      &lt;td&gt;Cell&lt;/td&gt;
-      &lt;td&gt;Cell&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr class="table-primary"&gt;
-      &lt;th scope="row"&gt;Primary&lt;/th&gt;
-      &lt;td&gt;Cell&lt;/td&gt;
-      &lt;td&gt;Cell&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr class="table-success"&gt;
-      &lt;th scope="row"&gt;Success&lt;/th&gt;
-      &lt;td&gt;Cell&lt;/td&gt;
-      &lt;td&gt;Cell&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr class="table-danger"&gt;
-      &lt;th scope="row"&gt;Danger&lt;/th&gt;
-      &lt;td&gt;Cell&lt;/td&gt;
-      &lt;td&gt;Cell&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;</code></pre>
-                                    </div>
-                                    <button class="btn btn-sm btn-outline-secondary" onclick="copyCode(this)">
                                         <i class="bi bi-clipboard me-2"></i>Copy Code
                                     </button>
                                 </div>

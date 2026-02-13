@@ -9,42 +9,22 @@
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="module" crossorigin nonce="<?php echo $nonce ?? ''; ?>" src="/assets/vendor-bootstrap-C9iorZI5.js"></script>
+    <script type="module" crossorigin nonce="<?php echo $nonce ?? ''; ?>" src="/assets/vendor-charts-DGwYAWel.js"></script>
+    <script type="module" crossorigin nonce="<?php echo $nonce ?? ''; ?>" src="/assets/vendor-ui-CflGdlft.js"></script>
+    <script type="module" crossorigin nonce="<?php echo $nonce ?? ''; ?>" src="/assets/main-DwHigVru.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/main-QD_VOj1Y.css">
+</head>
+
+<body data-page="settings" class="settings-page">
+    <div class="admin-app">
+        <div class="admin-wrapper" id="admin-wrapper">
+            <?php include_once("inc/header.php"); ?>
             <?php
             // index 12 = Settings
             $aside_indice = 12;
             include_once("inc/aside-TEMPLATE.php");
             ?>
-                                <a class="nav-link" href="/TEMPLATE/files">
-                                    <i class="bi bi-folder2-open"></i>
-                                    <span>Files</span>
-                                </a>
-                            </li>
-                            <li class="nav-item mt-3">
-                                <small class="text-muted px-3 text-uppercase fw-bold">Admin</small>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link active" href="/TEMPLATE/settings">
-                                    <i class="bi bi-gear"></i>
-                                    <span>Settings</span>
-                                    <span class="badge bg-primary rounded-pill ms-auto">Active</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/TEMPLATE/security">
-                                    <i class="bi bi-shield-check"></i>
-                                    <span>Security</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/TEMPLATE/help">
-                                    <i class="bi bi-question-circle"></i>
-                                    <span>Help & Support</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-            </aside>
 
             <!-- Floating Hamburger Menu -->
             <button class="hamburger-menu" 

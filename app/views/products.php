@@ -163,10 +163,8 @@
                                                 </th>
                                                 <th>Product</th>
                                                 <th @click="sortBy('category')" class="sortable">Category</th>
-                                                <th @click="sortBy('price')" class="sortable">Price</th>
-                                                <th @click="sortBy('stock')" class="sortable">Stock</th>
-                                                <th>Status</th>
-                                                <th @click="sortBy('created')" class="sortable">Created</th>
+                                                <!-- Price, Stock and Status columns removed -->
+                                                <th @click="sortBy('created')" class="sortable">Échangé</th>
                                                 <th style="width: 120px;">Actions</th>
                                             </tr>
                                         </thead>
@@ -193,25 +191,7 @@
                                                     <td>
                                                         <span class="badge bg-light text-dark" x-text="product.category"></span>
                                                     </td>
-                                                    <td x-text="`$${product.price}`"></td>
-                                                    <td>
-                                                        <span class="badge stock-badge" 
-                                                              :class="{
-                                                                  'in-stock': product.stock > 20,
-                                                                  'low-stock': product.stock > 0 && product.stock <= 20,
-                                                                  'out-of-stock': product.stock === 0
-                                                              }"
-                                                              x-text="product.stock + ' units'"></span>
-                                                    </td>
-                                                    <td>
-                                                        <span class="badge" 
-                                                              :class="{
-                                                                  'bg-success': product.status === 'published',
-                                                                  'bg-secondary': product.status === 'draft',
-                                                                  'bg-warning': product.status === 'pending'
-                                                              }"
-                                                              x-text="product.status"></span>
-                                                    </td>
+                                                    <!-- price, stock and status cells removed -->
                                                     <td x-text="product.created"></td>
                                                     <td>
                                                         <div class="dropdown">
@@ -227,7 +207,7 @@
                                                                 <li><a class="dropdown-item" href="#" @click="viewProduct(product)">
                                                                     <i class="bi bi-eye me-2"></i>View Details
                                                                 </a></li>
-                                                                <li><a class="dropdown-item" href="#" @click="duplicateProduct(product)">
+                                                                <li><a class="dropdown-item" href="#" @click="echangerProduct(product)">
                                                                     <i class="bi bi-copy me-2"></i>Duplicate
                                                                 </a></li>
                                                                 <li><hr class="dropdown-divider"></li>
@@ -274,7 +254,8 @@
                 </div>
             </main>
 
-            <!-- Footer -->            <?php include_once("inc/header.php") ; ?>
+            <!-- Footer -->            
+            <?php include_once("inc/header.php") ; ?>
 
         </div> <!-- /.admin-wrapper -->
     </div>

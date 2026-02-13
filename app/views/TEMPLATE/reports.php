@@ -18,34 +18,23 @@
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/assets/favicon-CvUZKS4z.svg">
     <link rel="icon" type="image/png" href="/assets/favicon-B_cwPWBd.png">
+    <link rel="icon" type="image/png" href="/assets/favicon-B_cwPWBd.png">
+    <script type="module" crossorigin nonce="<?php echo $nonce ?? ''; ?>" src="/assets/vendor-bootstrap-C9iorZI5.js"></script>
+    <script type="module" crossorigin nonce="<?php echo $nonce ?? ''; ?>" src="/assets/vendor-charts-DGwYAWel.js"></script>
+    <script type="module" crossorigin nonce="<?php echo $nonce ?? ''; ?>" src="/assets/vendor-ui-CflGdlft.js"></script>
+    <script type="module" crossorigin nonce="<?php echo $nonce ?? ''; ?>" src="/assets/main-DwHigVru.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/main-QD_VOj1Y.css">
+</head>
+
+<body data-page="reports" class="reports-page">
+    <div class="admin-app">
+        <div class="admin-wrapper" id="admin-wrapper">
+            <?php include_once("inc/header.php"); ?>
             <?php
             // index 8 = Reports
             $aside_indice = 8;
             include_once("inc/aside-TEMPLATE.php");
             ?>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/TEMPLATE/settings">
-                                    <i class="bi bi-gear"></i>
-                                    <span>Settings</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/TEMPLATE/security">
-                                    <i class="bi bi-shield-check"></i>
-                                    <span>Security</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/TEMPLATE/help">
-                                    <i class="bi bi-question-circle"></i>
-                                    <span>Help & Support</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-            </aside>
 
             <!-- Floating Hamburger Menu -->
             <button class="hamburger-menu" 

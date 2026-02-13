@@ -434,7 +434,7 @@
                                                 <th @click="sortBy('price')" class="sortable">Price</th>
                                                 <th @click="sortBy('stock')" class="sortable">Stock</th>
                                                 <th>Status</th>
-                                                <th @click="sortBy('created')" class="sortable">Created</th>
+                                                <th @click="sortBy('created')" class="sortable">Échangé</th>
                                                 <th style="width: 120px;">Actions</th>
                                             </tr>
                                         </thead>
