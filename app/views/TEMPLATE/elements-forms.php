@@ -24,152 +24,12 @@
     
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Prism.js for syntax highlighting -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
-    
-    <!-- Custom syntax highlighting overrides -->
-    <style>
-        .element-code-block pre[class*="language-"] {
-            background: #1e1e1e !important;
-            border: 1px solid #333 !important;
-            border-radius: 0.5rem !important;
-            margin: 0 !important;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
-        }
-        
-        .element-code-block code[class*="language-"] {
-            background: transparent !important;
-            color: #d4d4d4 !important;
-            font-family: 'Fira Code', 'Courier New', monospace !important;
-            font-size: 0.875rem !important;
-            line-height: 1.6 !important;
-        }
-        
-        /* VS Code inspired colors */
-        .token.tag { color: #569cd6 !important; }
-        .token.attr-name { color: #9cdcfe !important; }
-        .token.attr-value { color: #ce9178 !important; }
-        .token.string { color: #ce9178 !important; }
-        .token.punctuation { color: #808080 !important; }
-        .token.comment { color: #6a9955 !important; font-style: italic !important; }
-        
-        /* Bootstrap classes highlighting */
-        .token.attr-value .token.string {
-            background: linear-gradient(transparent 0%, transparent 100%);
-        }
-
-        /* Fix unreadable active+hover sidebar navigation */
-        .nav-submenu .nav-link.active:hover {
-            background-color: var(--bs-primary) !important;
-            color: white !important;
-            transform: translateX(2px) !important;
-        }
-
-        .nav-submenu .nav-link.active:hover i {
-            opacity: 1 !important;
-            color: white !important;
-        }
-
-        .sidebar-nav .nav .nav-link.active:hover {
-            background-color: var(--bs-primary) !important;
-            color: white !important;
-            transform: none !important;
-        }
-    </style>
-  <script type="module" crossorigin nonce="<?php echo $nonce ?? ''; ?>" src="/assets/vendor-bootstrap-C9iorZI5.js"></script>
-  <script type="module" crossorigin nonce="<?php echo $nonce ?? ''; ?>" src="/assets/vendor-charts-DGwYAWel.js"></script>
-  <script type="module" crossorigin nonce="<?php echo $nonce ?? ''; ?>" src="/assets/vendor-ui-CflGdlft.js"></script>
-  <script type="module" crossorigin nonce="<?php echo $nonce ?? ''; ?>" src="/assets/main-DwHigVru.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/main-QD_VOj1Y.css">
-</head>
-
-<body data-page="elements" class="elements-page">
-    <div class="admin-app">
-        <div class="admin-wrapper" id="admin-wrapper">
-            
-            <!-- Header -->
-            <header class="admin-header">
-                <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
-                    <div class="container-fluid">
-                        <a class="navbar-brand d-flex align-items-center" href="/TEMPLATE/dashboard">
-                            <img src="data:image/svg+xml,%3csvg%20width='32'%20height='32'%20viewBox='0%200%2032%2032'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3c!--%20Background%20circle%20for%20the%20M%20--%3e%3ccircle%20cx='16'%20cy='16'%20r='16'%20fill='url(%23logoGradient)'/%3e%3c!--%20Centered%20Letter%20M%20--%3e%3cpath%20d='M10%2024V8h2.5l2.5%206.5L17.5%208H20v16h-2V12.5L16.5%2020h-1L14%2012.5V24H10z'%20fill='white'%20font-weight='700'/%3e%3c!--%20Gradient%20definition%20--%3e%3cdefs%3e%3clinearGradient%20id='logoGradient'%20x1='0%25'%20y1='0%25'%20x2='100%25'%20y2='100%25'%3e%3cstop%20offset='0%25'%20style='stop-color:%236366f1;stop-opacity:1'%20/%3e%3cstop%20offset='100%25'%20style='stop-color:%238b5cf6;stop-opacity:1'%20/%3e%3c/linearGradient%3e%3c/defs%3e%3c/svg%3e" alt="Logo" height="32" class="d-inline-block align-text-top me-2">
-                            <h1 class="h4 mb-0 fw-bold text-primary">Metis</h1>
-                        </a>
-
-                        <div class="search-container flex-grow-1 mx-4" x-data="searchComponent">
-                            <div class="position-relative">
-                                <input type="search" class="form-control" placeholder="Search..." x-model="query" @input="search()" data-search-input>
-                                <i class="bi bi-search position-absolute top-50 end-0 translate-middle-y me-3"></i>
-                            </div>
-                        </div>
-
-                        <div class="navbar-nav flex-row">
-                            <div x-data="themeSwitch">
-                                <button class="btn btn-outline-secondary me-2" @click="toggle()">
-                                    <i class="bi bi-sun-fill" x-show="currentTheme === 'light'"></i>
-                                    <i class="bi bi-moon-fill" x-show="currentTheme === 'dark'"></i>
-                                </button>
-                            </div>
-                            <button class="btn btn-outline-secondary me-2" data-fullscreen-toggle>
-                                <i class="bi bi-arrows-fullscreen"></i>
-                            </button>
-                            <div class="dropdown">
-                                <button class="btn btn-outline-secondary d-flex align-items-center" data-bs-toggle="dropdown">
-                                    <img src="data:image/svg+xml,%3csvg%20width='32'%20height='32'%20viewBox='0%200%2032%2032'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3c!--%20Background%20circle%20--%3e%3ccircle%20cx='16'%20cy='16'%20r='16'%20fill='url(%23avatarGradient)'/%3e%3c!--%20Person%20silhouette%20--%3e%3cg%20fill='white'%20opacity='0.9'%3e%3c!--%20Head%20--%3e%3ccircle%20cx='16'%20cy='12'%20r='5'/%3e%3c!--%20Body%20--%3e%3cpath%20d='M16%2018c-5.5%200-10%202.5-10%207v1h20v-1c0-4.5-4.5-7-10-7z'/%3e%3c/g%3e%3c!--%20Subtle%20border%20--%3e%3ccircle%20cx='16'%20cy='16'%20r='15.5'%20fill='none'%20stroke='rgba(255,255,255,0.2)'%20stroke-width='1'/%3e%3c!--%20Gradient%20definition%20--%3e%3cdefs%3e%3clinearGradient%20id='avatarGradient'%20x1='0%25'%20y1='0%25'%20x2='100%25'%20y2='100%25'%3e%3cstop%20offset='0%25'%20style='stop-color:%236b7280;stop-opacity:1'%20/%3e%3cstop%20offset='100%25'%20style='stop-color:%234b5563;stop-opacity:1'%20/%3e%3c/linearGradient%3e%3c/defs%3e%3c/svg%3e" width="24" height="24" class="rounded-circle me-2">
-                                    <span class="d-none d-md-inline">John Doe</span>
-                                </button>
-                                <ul class="dropdown-menu dropdown-menu-end">
-                                    <li><a class="dropdown-item" href="#"><i class="bi bi-person me-2"></i>Profile</a></li>
-                                    <li><a class="dropdown-item" href="#"><i class="bi bi-gear me-2"></i>Settings</a></li>
-                                    <li><hr class="dropdown-divider"></li>
-                                    <li><a class="dropdown-item" href="#"><i class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </nav>
-            </header>
-
-            <!-- Sidebar -->
-            <aside class="admin-sidebar">
-                <div class="sidebar-content">
-                    <nav class="sidebar-nav">
-                        <ul class="nav flex-column">
-                            <li class="nav-item">
-                                <a class="nav-link" href="/dashboard">
-                                    <i class="bi bi-speedometer2"></i>
-                                    <span>Dashboard</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/analytics">
-                                    <i class="bi bi-graph-up"></i>
-                                    <span>Analytics</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/users">
-                                    <i class="bi bi-people"></i>
-                                    <span>Users</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/TEMPLATE/products">
-                                    <i class="bi bi-box"></i>
-                                    <span>Products</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/TEMPLATE/orders">
-                                    <i class="bi bi-bag-check"></i>
-                                    <span>Orders</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/TEMPLATE/forms">
-                                    <i class="bi bi-ui-checks"></i>
-                                    <span>Forms</span>
+            <!-- Sidebar (included) -->
+            <?php
+            // active submenu child: Forms (elements)
+            $aside_indice = '/TEMPLATE/elements/forms';
+            include_once("inc/aside-TEMPLATE.php");
+            ?>
                                     <span class="badge bg-success rounded-pill ms-auto">New</span>
                                 </a>
                             </li>
@@ -183,28 +43,7 @@
                                 <div class="collapse show" id="elementsSubmenu">
                                     <ul class="nav nav-submenu">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="/TEMPLATE/elements">
-                                                <i class="bi bi-grid"></i>
-                                                <span>Overview</span>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="/TEMPLATE/elements/buttons">
-                                                <i class="bi bi-square"></i>
-                                                <span>Buttons</span>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="/TEMPLATE/elements/alerts">
-                                                <i class="bi bi-exclamation-triangle"></i>
-                                                <span>Alerts</span>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="/TEMPLATE/elements/badges">
-                                                <i class="bi bi-award"></i>
-                                                <span>Badges</span>
-                                            </a>
+                                                                <a class="nav-link" href="/TEMPLATE/calendar">
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="/TEMPLATE/elements/cards">
@@ -248,96 +87,28 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="/TEMPLATE/calendar">
-                                    <i class="bi bi-calendar-event"></i>
-                                    <span>Calendar</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/TEMPLATE/files">
-                                    <i class="bi bi-folder2-open"></i>
-                                    <span>Files</span>
-                                </a>
-                            </li>
-                            <li class="nav-item mt-3">
-                                <small class="text-muted px-3 text-uppercase fw-bold">Admin</small>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/TEMPLATE/settings">
-                                    <i class="bi bi-gear"></i>
-                                    <span>Settings</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/TEMPLATE/security">
-                                    <i class="bi bi-shield-check"></i>
-                                    <span>Security</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/help">
-                                    <i class="bi bi-question-circle"></i>
-                                    <span>Help & Support</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-            </aside>
+                                    <!-- Fonts -->
+                                    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-            <!-- Floating Hamburger Menu -->
-            <button class="hamburger-menu" data-sidebar-toggle>
-                <i class="bi bi-list"></i>
-            </button>
+                                  <script type="module" crossorigin nonce="<?php echo $nonce ?? ''; ?>" src="/assets/vendor-bootstrap-C9iorZI5.js"></script>
+                                  <script type="module" crossorigin nonce="<?php echo $nonce ?? ''; ?>" src="/assets/vendor-charts-DGwYAWel.js"></script>
+                                  <script type="module" crossorigin nonce="<?php echo $nonce ?? ''; ?>" src="/assets/vendor-ui-CflGdlft.js"></script>
+                                  <script type="module" crossorigin nonce="<?php echo $nonce ?? ''; ?>" src="/assets/main-DwHigVru.js"></script>
+                                  <script type="module" crossorigin nonce="<?php echo $nonce ?? ''; ?>" src="/assets/elements-CKTxkm6E.js"></script>
+                                  <link rel="stylesheet" crossorigin href="/assets/main-QD_VOj1Y.css">
 
-            <!-- Main Content -->
-            <main class="admin-main">
-                <div class="container-fluid p-4">
-                    
-                    <!-- Breadcrumb -->
-                    <nav aria-label="breadcrumb" class="mb-4">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="/elements">Elements</a></li>
-                            <li class="breadcrumb-item active">Forms</li>
-                        </ol>
-                    </nav>
+                                </head>
 
-                    <!-- Page Header -->
-                    <div class="d-flex justify-content-between align-items-center mb-4">
-                        <div>
-                            <h1 class="h3 mb-0">Forms</h1>
-                            <p class="text-muted mb-0">Form controls, validation, input groups and layouts</p>
-                        </div>
-                        <div class="d-flex gap-2">
-                            <button class="btn btn-outline-secondary" onclick="window.history.back()">
-                                <i class="bi bi-arrow-left me-2"></i>Back
-                            </button>
-                            <button class="btn btn-primary" onclick="copyAllCode()">
-                                <i class="bi bi-clipboard me-2"></i>Copy All
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Form Examples -->
-                    <div class="row g-4">
-                        
-                        <!-- Basic Form Controls -->
-                        <div class="col-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h5 class="card-title mb-0">Basic Form Controls</h5>
-                                </div>
-                                <div class="card-body">
-                                    <div class="element-preview-container">
-                                        <form>
-                                            <div class="mb-3">
-                                                <label for="exampleFormControlInput1" class="form-label">Email address</label>
-                                                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
-                                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                            </div>
-                                            <div class="mb-3">
+                                <body data-page="elements" class="elements-page">
+                                    <!-- Admin App Container -->
+                                    <div class="admin-app">
+                                        <div class="admin-wrapper" id="admin-wrapper">
+                                            <?php include_once("inc/header.php"); ?>
+                                            <?php
+                                            // active submenu child: Forms (elements)
+                                            $aside_indice = '/TEMPLATE/elements/forms';
+                                            include_once("inc/aside-TEMPLATE.php");
+                                            ?>
                                                 <label for="formFile" class="form-label">Default file input example</label>
                                                 <input class="form-control" type="file" id="formFile">
                                             </div>

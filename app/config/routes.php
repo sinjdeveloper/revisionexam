@@ -25,21 +25,18 @@ $router->group('', function (Router $router) use ($app) {
 
 	// Login index
 	$router->get('/', function () use ($app, $render) {
-		$render('login');
+		$render('products');
 	});
+
+
+
 
 	// Routes for top-level views in app/views
 	$router->get('/login', function () use ($app, $render) {
 		$render('login');
 	});
 
-	$router->get('/dashboard', function () use ($app, $render) {
-		$render('index');
-	});
 
-	$router->get('/analytics', function () use ($app, $render) {
-		$render('analytics');
-	});
 
 	$router->get('/orders', function () use ($app, $render) {
 		$render('orders');
@@ -49,9 +46,50 @@ $router->group('', function (Router $router) use ($app) {
 		$render('products');
 	});
 
-	$router->get('/users', function () use ($app, $render) {
-		$render('users');
+
+
+
+	// Redirect legacy top-level routes to new backoffice mapping
+	// $router->get('/dashboard', function () use ($app) {
+	// 	$app->redirect('/backoffice/dashboard');
+	// });
+
+	// $router->get('/analytics', function () use ($app) {
+	// 	$app->redirect('/backoffice/analytics');
+	// });
+
+	// $router->get('/users', function () use ($app) {
+	// 	$app->redirect('/backoffice/users');
+	// });
+
+	// Backoffice routes group (serve same views under /backoffice/*)
+	$router->group('/backoffice', function (Router $router) use ($app, $render) {
+
+		// Backoffice root -> dashboard view
+		$router->get('/', function () use ($app, $render) {
+			$render('index');
+		});
+
+		// Dashboard
+		$router->get('/dashboard', function () use ($app, $render) {
+			$render('index');
+		});
+
+		// Analytics
+		$router->get('/analytics', function () use ($app, $render) {
+			$render('analytics');
+		});
+
+		// Users
+		$router->get('/users', function () use ($app, $render) {
+			$render('users');
+		});
+
 	});
+
+
+
+
 
 	$router->get('/welcome', function () use ($app, $render) {
 		$render('welcome');

@@ -45,7 +45,7 @@
             
             <?php include_once("inc/header.php") ; ?>
             <!-- Sidebar -->
-            <?php include_once("inc/aside.php") ; ?>
+            <?php include_once("inc/aside-backoffice.php") ; ?>
 
             <!-- Floating Hamburger Menu -->
             <button class="hamburger-menu" 
