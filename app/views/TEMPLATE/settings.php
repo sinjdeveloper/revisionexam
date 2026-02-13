@@ -395,7 +395,7 @@
                 </div>
             </main>
 
-            <!-- Footer -->            <?php include_once("inc/header.php") ; ?>
+            <!-- Footer -->            <?php include_once("inc/footer.php") ; ?>
 
         </div> <!-- /.admin-wrapper -->
     </div>

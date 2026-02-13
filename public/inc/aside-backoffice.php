@@ -1,25 +1,21 @@
-            <!-- Sidebar -->
+<!-- Backoffice Sidebar -->
             <?php
-            // Liste des entrées de l'aside — numérotation commençant à 1
-            // aside général (ne référence plus les vues Dashboard/Analytics/Users)
+            // Entrées spécifiques au backoffice — numérotation commençant à 1
             $aside_items = [
-                ['href' => '/products', 'icon' => 'bi bi-box', 'title' => 'Products', 'badge' => null],
-                ['href' => '/orders', 'icon' => 'bi bi-bag-check', 'title' => 'Orders', 'badge' => null],
-                // ['href' => '/reports', 'icon' => 'bi bi-file-earmark-text', 'title' => 'Reports', 'badge' => null],
-                // ['href' => '/settings', 'icon' => 'bi bi-gear', 'title' => 'Settings', 'badge' => null],
+                ['href' => '/backoffice/dashboard', 'icon' => 'bi bi-speedometer2', 'title' => 'Dashboard', 'badge' => null],
+                ['href' => '/backoffice/analytics', 'icon' => 'bi bi-graph-up', 'title' => 'Analytics', 'badge' => null],
+                ['href' => '/backoffice/users', 'icon' => 'bi bi-people', 'title' => 'Users', 'badge' => 'Active'],
             ];
 
             // Couleur de surbrillance (hex / rgb / hsl équivalentes : #6366f1)
             $aside_highlight = $aside_highlight ?? '#6366f1';
 
             // Mode debug : définir $aside_debug = true avant l'include pour activer les aides de debug
-            // Si non défini, par défaut false. On autorise aussi de le définir directement ici.
             $aside_debug = isset($aside_debug) ? (bool)$aside_debug : false;
 
             // L'utilisateur peut définir $aside_indice (int) avant l'include pour activer la surbrillance
             $aside_indice = isset($aside_indice) ? (int)$aside_indice : null;
             // Pour debug : afficher la numérotation visible (false par défaut)
-            // Le mode debug force l'affichage des numéros si activé.
             $show_aside_numbers = !empty($show_aside_numbers) || $aside_debug;
 
             // Si aucun $aside_indice défini par le fichier qui inclut, afficher un indicateur
@@ -60,5 +56,4 @@
                     </nav>
                 </div>
             </aside>
-            <!-- End Sidebar -->
-
+            <!-- End Backoffice Sidebar -->
