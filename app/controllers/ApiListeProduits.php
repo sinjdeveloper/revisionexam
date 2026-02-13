@@ -4,7 +4,7 @@ namespace app\controllers;
 
 use flight\Engine;
 
-Class ApiListeObjet {
+Class ApiListeProduits {
 
     protected Engine $app;
 
@@ -12,7 +12,7 @@ Class ApiListeObjet {
         $this->app = $app;
     }
 
-    public function getListeObjet() {
+    public function getListeProduits() {
         $sql = "SELECT * FROM produits";
         $stmt = $this->app->db()->prepare($sql);
         $stmt->execute();
@@ -20,7 +20,7 @@ Class ApiListeObjet {
         $this->app->json($result);
     }
 
-    public function getListeObjetAppartenant($id){
+    public function getListeProduitsAppartenant($id){
         $sql = "SELECT * FROM produits WHERE id_proprietaire = :id";
         $stmt = $this->app->db()->prepare($sql);
         $stmt->execute([':id' => (int)$id]);
