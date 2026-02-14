@@ -273,21 +273,18 @@ $router->group('', function (Router $router) use ($app) {
 
 				// Mock endpoints serving hard-coded JSON (useful for frontend testing)
 				$router->get('/mock/products', function() use ($app) {
-					$path = __DIR__ . $app->get('flight.base_url') . '/../../public/assets/mock/products.json';
-					// fallback to public path
-					$publicPath = dirname(__DIR__, 3) . '/public/assets/mock/products.json';
-					$file = file_exists($publicPath) ? $publicPath : $path;
-					if (!file_exists($file)) {
+					$publicPath = dirname(__DIR__, 3) . '/public/assets/fakejsonAPIs/products.json';
+					if (!file_exists($publicPath)) {
 						$app->response()->status(404);
 						echo json_encode(['error' => 'mock file not found']);
 						return;
 					}
 					$app->response()->header('Content-Type', 'application/json');
-					echo file_get_contents($file);
+					echo file_get_contents($publicPath);
 				});
 
 				$router->get('/mock/users', function() use ($app) {
-					$publicPath = dirname(__DIR__, 3) . '/public/assets/mock/users.json';
+					$publicPath = dirname(__DIR__, 3) . '/public/assets/fakejsonAPIs/users.json';
 					if (!file_exists($publicPath)) {
 						$app->response()->status(404);
 						echo json_encode(['error' => 'mock file not found']);
