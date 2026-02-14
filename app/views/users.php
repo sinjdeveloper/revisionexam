@@ -611,23 +611,58 @@
                 </div>
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label class="form-label">Upload CSV File</label>
-                        <input type="file" class="form-control" accept=".csv">
-                        <div class="form-text">Upload a CSV file with columns: name, email, role, status</div>
+                        <label class="form-label">Upload JSON File</label>
+                        <input type="file" class="form-control" accept=".json,application/json" id="importUsersFile">
+                        <div class="form-text">Upload a JSON file (array of objects) with keys: name, email, role, status</div>
                     </div>
                     <div class="alert alert-info">
                         <i class="bi bi-info-circle me-2"></i>
-                        <strong>CSV Format:</strong> name, email, role, status<br>
-                        <small>Example: John Doe, john@example.com, user, active</small>
+                        <strong>JSON Format:</strong> [{ "name": "John Doe", "email": "john@example.com", "role": "user", "status": "active" }]<br>
+                        <small>Example: an array of user objects as shown above.</small>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary">Import Users</button>
+                    <button type="button" class="btn btn-primary" id="importUsersBtn">Import Users</button>
                 </div>
             </div>
         </div>
     </div>
+
+    <script nonce="<?php echo $nonce ?? ''; ?>">
+    (function(){
+        const modal = document.getElementById('importModal');
+        if(!modal) return;
+        const fileInput = document.getElementById('importUsersFile');
+        const importBtn = document.getElementById('importUsersBtn');
+        importBtn?.addEventListener('click', () => {
+            const file = fileInput.files[0];
+            if(!file){ alert('Please select a JSON file to import.'); return; }
+            const reader = new FileReader();
+            reader.onload = async (e) => {
+                try {
+                    const data = JSON.parse(e.target.result);
+                    const res = await fetch('/api/import/users', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(data)
+                    });
+                    if(res.ok){
+                        alert('Import successful');
+                        const bsClose = modal.querySelector('[data-bs-dismiss]');
+                        bsClose && bsClose.click();
+                    } else {
+                        const txt = await res.text();
+                        alert('Import failed: ' + txt);
+                    }
+                } catch(err){
+                    alert('Invalid JSON file: ' + err.message);
+                }
+            };
+            reader.readAsText(file);
+        });
+    })();
+    </script>
 
     <!-- Page-specific Component -->
 

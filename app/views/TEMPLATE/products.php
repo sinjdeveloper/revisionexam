@@ -622,23 +622,58 @@
                 </div>
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label class="form-label">Upload CSV File</label>
-                        <input type="file" class="form-control" accept=".csv">
-                        <div class="form-text">Upload a CSV file with columns: name, sku, category, price, stock, status</div>
+                        <label class="form-label">Upload JSON File</label>
+                        <input type="file" class="form-control" accept=".json,application/json" id="importProductsFile">
+                        <div class="form-text">Upload a JSON file (array of objects) with keys: name, sku, category, price, status</div>
                     </div>
                     <div class="alert alert-info">
                         <i class="bi bi-info-circle me-2"></i>
-                        <strong>CSV Format:</strong> name, sku, category, price, stock, status<br>
-                        <small>Example: iPhone 14, IPHONE14-128, electronics, 799.99, 50, published</small>
+                        <strong>JSON Format:</strong> [{ "name": "iPhone 14", "sku": "IPHONE14-128", "category": "electronics", "price": 799.99, "status": "published" }]<br>
+                        <small>Example: an array of product objects as shown above.</small>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary">Import Products</button>
+                    <button type="button" class="btn btn-primary" id="importProductsBtn">Import Products</button>
                 </div>
             </div>
         </div>
     </div>
+
+    <script nonce="<?php echo $nonce ?? ''; ?>">
+    (function(){
+        const modal = document.getElementById('importModal');
+        if(!modal) return;
+        const fileInput = document.getElementById('importProductsFile');
+        const importBtn = document.getElementById('importProductsBtn');
+        importBtn?.addEventListener('click', () => {
+            const file = fileInput.files[0];
+            if(!file){ alert('Please select a JSON file to import.'); return; }
+            const reader = new FileReader();
+            reader.onload = async (e) => {
+                try {
+                    const data = JSON.parse(e.target.result);
+                    const res = await fetch('/api/import/products', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(data)
+                    });
+                    if(res.ok){
+                        alert('Import successful');
+                        const bsClose = modal.querySelector('[data-bs-dismiss]');
+                        bsClose && bsClose.click();
+                    } else {
+                        const txt = await res.text();
+                        alert('Import failed: ' + txt);
+                    }
+                } catch(err){
+                    alert('Invalid JSON file: ' + err.message);
+                }
+            };
+            reader.readAsText(file);
+        });
+    })();
+    </script>
 
     <!-- Page-specific Component -->
 

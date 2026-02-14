@@ -600,14 +600,14 @@
                 </div>
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label class="form-label">Upload CSV File</label>
-                        <input type="file" class="form-control" accept=".csv">
-                        <div class="form-text">Upload a CSV file with columns: name, email, role, status</div>
+                        <label class="form-label">Upload JSON File</label>
+                        <input type="file" class="form-control" accept=".json,application/json" id="importUsersFile">
+                        <div class="form-text">Upload a JSON file (array of objects) with keys: name, email, role, status</div>
                     </div>
                     <div class="alert alert-info">
                         <i class="bi bi-info-circle me-2"></i>
-                        <strong>CSV Format:</strong> name, email, role, status<br>
-                        <small>Example: John Doe, john@example.com, user, active</small>
+                        <strong>JSON Format:</strong> [{ "name": "John Doe", "email": "john@example.com", "role": "user", "status": "active" }]<br>
+                        <small>Example: an array of user objects as shown above.</small>
                     </div>
                 </div>
                 <div class="modal-footer">
