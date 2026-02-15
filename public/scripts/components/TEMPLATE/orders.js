@@ -1,4 +1,4 @@
-import { m as Alpine } from "./vendor-ui-CflGdlft.js";
+import Alpine from 'alpinejs';
 
 document.addEventListener('alpine:init', () => {
   Alpine.data('orderTable', () => ({
@@ -25,12 +25,10 @@ document.addEventListener('alpine:init', () => {
 
     statusStats: [],
 
-    async init() {
-      this.isLoading = true;
-      await this.loadFromApi();
+    init() {
+      this.loadSampleData();
       this.filterOrders();
       this.calculateStats();
-      this.isLoading = false;
       
       // Delay chart initialization to ensure DOM is fully ready
       setTimeout(() => {
@@ -38,53 +36,7 @@ document.addEventListener('alpine:init', () => {
       }, 500);
     },
 
-    statusMap: { 1: 'pending', 2: 'processing', 3: 'cancelled', 4: 'delivered' },
-
-    mapOrder(e, index) {
-      const year = e.created_at ? new Date(e.created_at).getFullYear() : 2025;
-      const id = e.id || index + 1;
-      return {
-        id: id,
-        orderNumber: e.orderNumber || `ECH-${year}-${String(id).padStart(3, '0')}`,
-        customer: e.customer || {
-          name: `Utilisateur #${e.id_proprietaire || '?'}`,
-          email: `user${e.id_proprietaire || id}@example.com`,
-          avatar: '/assets/images/avatar-placeholder.svg'
-        },
-        items: e.items || [
-          { name: `Produit #${e.id_produit1 || '?'}`, quantity: 1, price: 0 },
-          { name: `Produit #${e.id_produit2 || '?'}`, quantity: 1, price: 0 }
-        ],
-        itemCount: e.itemCount || 2,
-        total: e.total || 0,
-        status: e.status || this.statusMap[e.id_status] || 'pending',
-        orderDate: (e.created_at || e.orderDate || new Date().toISOString()).substring(0, 10),
-        shippingAddress: e.shippingAddress || 'Échange en personne'
-      };
-    },
-
-    async loadFromApi() {
-      try {
-        const response = await fetch('/api/echanges/liste');
-        if (!response.ok) throw new Error('API error');
-        const data = await response.json();
-        this.orders = data.map((e, i) => this.mapOrder(e, i));
-      } catch (error) {
-        console.warn('API echanges indisponible, chargement mock...', error);
-        try {
-          const mockResponse = await fetch('/api/mock/echanges');
-          if (!mockResponse.ok) throw new Error('Mock error');
-          const mockData = await mockResponse.json();
-          this.orders = mockData.map((e, i) => this.mapOrder(e, i));
-        } catch (mockError) {
-          console.error('Impossible de charger les échanges', mockError);
-          this.orders = [];
-        }
-      }
-    },
-
-    /** @deprecated Sample data kept for reference only - not used */
-    _loadSampleData_unused() {
+    loadSampleData() {
       this.orders = [
         {
           id: 1,

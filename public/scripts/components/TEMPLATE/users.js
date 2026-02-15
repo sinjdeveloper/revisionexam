@@ -14,55 +14,15 @@ document.addEventListener('alpine:init', () => {
     sortDirection: 'asc',
     isLoading: false,
 
-    async init() {
-      this.isLoading = true;
-      await this.loadFromApi();
+    init() {
+      this.loadSampleData();
       this.filterUsers();
-      this.isLoading = false;
       this.$nextTick(() => {
         this.initCharts();
       });
     },
 
-    mapUser(u, index) {
-      const roles = ['user', 'admin', 'moderator'];
-      const departments = ['Engineering', 'Marketing', 'Support', 'Sales', 'HR', 'Design'];
-      return {
-        id: u.id || index + 1,
-        name: u.username || u.name || 'Utilisateur',
-        email: u.email || '',
-        role: u.role || roles[index % roles.length],
-        status: u.status || 'active',
-        lastActive: u.lastActive || 'Récemment',
-        joinDate: (u.created_at || u.joinDate || new Date().toISOString()).substring(0, 10),
-        avatar: u.avatar || '/assets/images/avatar-placeholder.svg',
-        phone: u.phone || '',
-        department: u.department || departments[index % departments.length]
-      };
-    },
-
-    async loadFromApi() {
-      try {
-        const response = await fetch('/api/users/liste');
-        if (!response.ok) throw new Error('API error');
-        const data = await response.json();
-        this.users = data.map((u, i) => this.mapUser(u, i));
-      } catch (error) {
-        console.warn('API users indisponible, chargement mock...', error);
-        try {
-          const mockResponse = await fetch('/api/mock/users');
-          if (!mockResponse.ok) throw new Error('Mock error');
-          const mockData = await mockResponse.json();
-          this.users = mockData.map((u, i) => this.mapUser(u, i));
-        } catch (mockError) {
-          console.error('Impossible de charger les utilisateurs', mockError);
-          this.users = [];
-        }
-      }
-    },
-
-    /** @deprecated Sample data kept for reference only - not used */
-    _loadSampleData_unused() {
+    loadSampleData() {
         this.users = [
         {
             id: 1,

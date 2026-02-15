@@ -25,12 +25,10 @@ document.addEventListener('alpine:init', () => {
 
     categoryStats: [],
 
-    async init() {
-      this.isLoading = true;
-      await this.loadFromApi();
+    init() {
+      this.loadSampleData();
       this.filterProducts();
       this.calculateStats();
-      this.isLoading = false;
       
       // Delay chart initialization to ensure DOM is fully ready
       setTimeout(() => {
@@ -38,45 +36,7 @@ document.addEventListener('alpine:init', () => {
       }, 500);
     },
 
-    categoryMap: { 1: 'electronics', 2: 'clothing', 3: 'books', 4: 'home', 5: 'sports', 6: 'toys' },
-
-    mapProduct(p, index) {
-      return {
-        id: p.id || index + 1,
-        name: p.nom || p.name || 'Produit sans nom',
-        sku: p.sku || `PROD-${String(p.id || index + 1).padStart(3, '0')}`,
-        category: this.categoryMap[p.id_categorie] || p.category || 'other',
-        price: parseFloat(p.prix || p.price) || 0,
-        stock: typeof p.disponible !== 'undefined' ? (p.disponible ? 50 : 0) : (p.stock || 0),
-        status: p.status || (p.disponible ? 'published' : 'draft'),
-        created: (p.created_at || p.created || new Date().toISOString()).substring(0, 10),
-        image: p.image || '/assets/images/product-placeholder.svg',
-        description: p.description || ''
-      };
-    },
-
-    async loadFromApi() {
-      try {
-        const response = await fetch('/api/produits/liste');
-        if (!response.ok) throw new Error('API error');
-        const data = await response.json();
-        this.products = data.map((p, i) => this.mapProduct(p, i));
-      } catch (error) {
-        console.warn('API produits indisponible, chargement mock...', error);
-        try {
-          const mockResponse = await fetch('/api/mock/products');
-          if (!mockResponse.ok) throw new Error('Mock error');
-          const mockData = await mockResponse.json();
-          this.products = mockData.map((p, i) => this.mapProduct(p, i));
-        } catch (mockError) {
-          console.error('Impossible de charger les produits', mockError);
-          this.products = [];
-        }
-      }
-    },
-
-    /** @deprecated Sample data kept for reference only - not used */
-    _loadSampleData_unused() {
+    loadSampleData() {
       this.products = [
         {
           id: 1,
